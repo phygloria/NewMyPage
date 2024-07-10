@@ -16,7 +16,7 @@ private final HyMovieRepository hyMovieRepository;
         this.hyMovieRepository = hyMovieRepository;
     }
 
-    public int post(HyMovieDTO hyMovieDTO){
+    /*public int post(HyMovieDTO hyMovieDTO){
         List<HyMovieEntity> hyMovieEntities = hyMovieRepository.findAll();
 
         for (HyMovieEntity post: hyMovieEntities){
@@ -24,7 +24,6 @@ private final HyMovieRepository hyMovieRepository;
                 return 0;
             }
         }
-
         HyMovieEntity savePost = new HyMovieEntity();
         savePost.setTitle(hyMovieDTO.getTitle());
         savePost.setImageUrl(hyMovieDTO.getImageUrl());
@@ -38,9 +37,9 @@ private final HyMovieRepository hyMovieRepository;
         if(result != null){
             resultValue = 1;
         }
-
         return resultValue;
+    }*/
 
+    public void savepost(HyMovieDTO hyMovieDTO) {
     }
-
 }
