@@ -1,0 +1,207 @@
+
+.body_box {
+    margin: 30px;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1.5);
+}
+
+
+
+
+.posterGroup {
+    display: flex;
+    margin-top: 30px;
+    justify-content: center;
+}
+
+
+/* 포스터 이미지 */
+.poster-img {
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 1.5);
+    width: 350px;
+    height: 500px;
+    display: flex;
+    margin-bottom: 50px;
+}
+
+
+/* 타이틀 */
+.main-title {
+    font-family: "BookkMyungjo-Bd";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 100px;
+    text-align: center;
+    color: #484848;
+}
+
+
+/*.sub-title {*/
+/*    font-family: "GenAR102";*/
+/*    font-style: normal;*/
+/*    font-size: 20px;*/
+/*    text-align: center;*/
+/*    color: #484848;*/
+/*    margin: 50px;*/
+/*}*/
+
+
+
+/* 명대사 구역 */
+.best-bg {
+    box-shadow: 3px 3px 10px #895c87;
+    height: 200px;
+    background-color: #222222;
+    justify-content: center;
+    border-radius: 10px;
+    display: flex;
+    padding: 30px 30px;
+    max-width: 1000px; /* 최대 너비를 설정 */
+    margin: 0 auto; /* 가운데 정렬 */
+}
+
+/* 명대사 */
+.best-ment {
+    font-family: 'BookkMyungjo-Bd';
+    font-style: normal;
+    font-size: 20px;
+    line-height: 50px;
+    margin-left: 20px;
+    align-content: center;
+    letter-spacing: 0.5px;
+    color: #f1f1f1;
+}
+
+
+ /*영화정보 */
+.Info-bg {
+    margin: 0 auto;
+    margin-top: 15px;
+    padding: 30px 30px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px #895c87;
+    max-width: 1000px; /* 최대 너비를 설정 */
+}
+/*.Info {*/
+
+/*    !*align-content: center;*!*/
+/*    !*justify-content: center;*!*/
+/*}*/
+.movie-info-t {
+    font-family: "GenAR102";
+    font-style: normal;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 30px 30px;
+    color: #7043B8;
+    /*text-align: center;*/
+}
+
+
+
+.h3 {
+    font-family: "GenAR102";
+    font-style: normal;
+    font-size: 30px;
+    text-align: center;
+    justify-content: center;
+    margin-top: 130px;
+    margin-bottom: 30px;
+}
+
+/* 시놉시스 구역 */
+.synop-bg {
+    box-shadow: 3px 3px 10px #895c87;
+    height: 450px;
+    padding: 30px 30px;
+    background: #f1f1f1;
+    border-radius: 30px;
+    display: flex;
+    gap: 30px;
+    max-width: 1000px !important; /* 최대 너비를 설정 */
+    margin: 0 auto; /* 가운데 정렬 */
+}
+
+
+.story-title {
+    font-family: "GenAR102";
+    font-style: normal;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 70px;
+    letter-spacing: 0.5px;
+    margin-left: 20px;
+    color: midnightblue;
+}
+
+.story-text {
+    font-family: "GenAR102";
+    font-style: normal;
+    font-size: 15px;
+    /*line-height: 20px;*/
+    /*margin-top: 10px;*/
+    margin-bottom: 30px;
+    margin-left: 20px;
+    letter-spacing: 0.5px;
+    color: midnightblue;
+}
+
+.Review-box {
+    box-shadow: 3px 3px 10px #895c87;
+    height: 250px;
+    padding: 30px 30px;
+    background: #f1f1f1;
+    border-radius: 30px;
+    display: flex;
+    max-width: 1000px; /* 최대 너비를 설정 */
+    margin: 0 auto; /* 가운데 정렬 */
+
+}
+
+.review-text {
+    padding: 30px 30px;
+    letter-spacing: 0.5px;
+    color: dimgray;
+
+}
+
+.review-title {
+    font-family: "GenAR102";
+    font-style: normal;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 70px;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid black;
+}
+
+.review-detail {
+    padding-top: 10px;
+    font-family: "GenAR102";
+    font-style: normal;
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: 0.5px;
+}
+
+
+
+.postBtn {
+
+    width: 50px;
+    height: 30px;
+    margin-top: 70px;
+    margin-bottom: 20px;
+    box-shadow: 3px 3px 10px #895c87;
+    border-radius: 10px;
+
+}
+
+.home-btn {
+    width: 30px;
+    height: 30px;
+    margin-top: 70px;
+    margin-bottom: 20px;
+}

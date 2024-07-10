@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+    <link rel="stylesheet" th:href="@{/css/subPageAll.css}">
+    <link rel="stylesheet" th:href="@{/css/Hayoung/Hayoung.css}">
+    <link rel="stylesheet" th:href="@{/css/Hayoung/hy_font.css}">
+</head>
+
+<body class="bodyBack_Lee">
+<div th:replace="header/header :: header"></div>
+<section class=" section_Lee">
+    <div class="W100_Lee">
+        <div class="W100_Lee">
+            <div>
+                <p class="section_subTitle_header_Lee ">영화도 보고싶고 드라마도 보고싶고 애니메이션도 보고시펏</p>
+            </div>
+            <div class="section_subTitle_Lee">
+                <p>영화 "명량 · 한산 · 노량" 리뷰</p>
+            </div>
+            <div class="section_Data_box_Lee Df_JB DF_AC">
+                <div class="Df_JB DF_AC W100_Lee">
+                    <div class="Df DF_AC">
+                        <img th:src="@{/img/Hayoung/PHY_icon.png}" alt="" class="W24H24">
+                        <p class="ml10_Color mt4_3">PlORIA</p>
+                        <p class="ml10_Color">2024-06-20</p>
+                    </div>
+                    <div class="Color">
+                        <a th:href="@{/page/subpage}">돌아가기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 영화 소개  -->
+<div class="body_box">
+    <div>
+        <p class="main-title" th:text="${title}"></p>
+<!--     나라를 위한 그의 이야기 -->
+        <div class="posterGroup">
+            <img class="poster-img" th:src="@{imageUrl}"/>
+<!--            <img class="poster-img" th:src="@{imageUrl02}"/>-->
+<!--            <img class="poster-img" th:src="@{imageUrl03}"/>-->
+        </div>
+    </div>
+
+    <!-- 명대사 구역 -->
+    <div class="best-bg">
+        <div class="best-ment">
+            <p th:text="${bestMent}"></p>
+<!--            <p th:text="${bestMent02}"></p>-->
+<!--            <p th:text="${bestMent03}"></p>-->
+<!--            아직 신에게는 12척의 배가 남아 있사옵니다. - 명량 - -->
+<!--            운명을 바꿀 압도적 승리. 의와 불의의 싸움이지. - 한산 - -->
+<!--            절대 이렇게 전쟁을 끝내서는 안 된다 - 노량 - -->
+        </div>
+    </div>
+
+
+    <div class="part-box">
+        <div class="Info-bg">
+            <div class="movie-info-t">
+                <div class="Info">
+                    <p th:text="'감독 : ' + ${director}"></p>
+                    <p th:text="'제작사 : ' + ${produce}"></p>
+                    <p th:text="'출연 : ' + ${actor}"></p>
+                    <p th:text="'장르 : ' + ${genre}"></p>
+                    <p th:text="'개봉일 : ' + ${releaseDate}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--    감독 : 김한민<br>-->
+<!--    제작사 : ㈜빅스톤 픽쳐스<br>-->
+<!--    출연 : 최민식(명량), 박해일(한산), 김윤석(노량)<br>-->
+<!--    장르 : 액션, 드라마, 사극, 전쟁, 스릴러<br>-->
+<!--    개봉일 : 2014년7월30일(명량) /2022년7월27일(한산) / 2023년12월20일(노량)-->
+
+
+    <div class="part-box">
+        <div class="synopsys">
+            <h3 class="h3">─ 영 화 시놉시스 ─</h3>
+        </div>
+        <div class="synop-bg">
+            <div>
+                <p class="story-title" th:text="'| ' + ${storyTitle}"></p>
+                <p class="story-text" th:text="${storyText}">
+<!--                    | 명 량-->
+<!--                    330척에 달하는 왜군의 배가 속속 집결하고-->
+<!--                    압도적인 수의 열세에 모두가 패배를 직감하는 순간,<br>-->
+<!--                    이순신 장군은 단 12척의 배를 이끌고 명량 바다를 향해 나선다…!-->
+                </p>
+                <p class="story-title" th:text="'| ' + ${storyTitle}"></p>
+                <p class="story-text" th:text="${storyText}">
+<!--                    | 한 산-->
+<!--                    앞선 전투에서 손상을 입은 거북선의 출정이 어려워지고,-->
+<!--                    거북선의 도면마저 왜군의 첩보에 의해 도난당하게 되는데…-->
+<!--                    왜군은 연승에 힘입어 그 우세로 한산도 앞바다로 향하고,-->
+<!--                    이순신 장군은 조선의 운명을 가를 전투를 위해 필사의 전략을 준비한다.-->
+                </p>
+                <p class="story-title" th:text="'| ' + ${storyTitle}"></p>
+                <p class="story-text" th:text="${storyText}">
+<!--                    | 노 량
+                    왜군을 완벽하게 섬멸하는 것이 이 전쟁을 올바르게 끝내는 것이라 생각한 이순신은
+                    명나라와 조명연합함대를 꾸려 왜군의 퇴각로를 막고 적들을 섬멸하기로 결심한다.
+                    하지만 왜군의 뇌물 공세에 넘어간 명나라 도독 진린(정재영)은 왜군에게 퇴로를 열어주려 하고,
+                    설상가상으로 왜군 수장인 시마즈(백윤식)의 살마군까지 왜군의 퇴각을 돕기 위해 노량으로 향하는데…-->
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+
+        <div>
+            <h3 class="h3">▷▷▷ 리 뷰 ▶▶▶</h3>
+        </div>
+        <div class="Review-box">
+            <div class="review-text">
+                <p class="review-title" th:text="${reviewTitle}"></p>
+                <p class="review-detail" th:text="${reviewDetail}">
+<!--                    GPT는 명량을 이렇게 보았다-->
+<!--                영화 "명량"은 역사적인 명량 해전을 사실감 있게 재현한 작품으로,<br>-->
+<!--                이순신 장군의 지략과 리더십을 강렬하게 그려냈습니다. <br>-->
+<!--                뛰어난 연출과 배우들의 열연이 돋보이며, 긴장감 넘치는 전투 장면들이 관객을 몰입하게 만듭니다.<br>-->
+<!--                대한민국 역사 영화의 새로운 지평을 연 감동적인 작품입니다.-->
+                </p>
+            </div>
+        </div>
+</div>
+
+
+    <div style="width: 100%; text-align: center;">
+        <a class="postBtn" th:href="@{/page/hayoung/Hyounginput}">글쓰기</a>
+        <br>
+<!--        <a th:href="@{/page/subpage}">목록으로</a>-->
+        <br>
+        <a th:href="@{/}"><img class="home-btn" th:src="@{img/Hayoung/Home.png}"></a>
+
+    </div>
+
+</section>
+
+
+
+<footer>
+
+</footer>
+</body>
+
+</html>
