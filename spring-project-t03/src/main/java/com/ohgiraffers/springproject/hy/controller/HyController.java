@@ -4,10 +4,13 @@ import com.ohgiraffers.springproject.hy.model.dto.HyMovieDTO;
 import com.ohgiraffers.springproject.hy.service.HyMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller //사용자의 요청을 컨트롤하겠다는 어노테이션
 public class HyController {
@@ -22,13 +25,13 @@ public class HyController {
         this.hyMovieService = hyMovieService;
     }
 
-    // 루트 URL에 대한 GET 요청을 처리하기 위해 사용되는 어노테이션
+    /*// 루트 URL에 대한 GET 요청을 처리하기 위해 사용되는 어노테이션
     // 클라이언트가 http://localhost:8080/에 GET 요청을 보낼 때 이 메서드가 호출됩니다.
     @GetMapping("/")
     public String haYoungPage() {
         // 경로설정
         return "hayoung/Hayoung";
-    }
+    }*/
 
     //[등록하기]
     // 글쓰기(등록) 화면을 보여준다.
@@ -51,7 +54,7 @@ public class HyController {
         mv.setViewName("posts");
 
         /* 리다이렉트 로직 */
-        // ▽ 수업자료 보고 만든 리다이렉트 로직
+        /*// ▽ 수업자료 보고 만든 리다이렉트 로직
         if(hyMovieDTO.getTitle() == null || hyMovieDTO.getTitle().equals("")){
             mv.setViewName("redirect:/hyounginput");
         }
@@ -59,8 +62,11 @@ public class HyController {
             mv.setViewName("redirect:/hyounginput");
         }
         if(hyMovieDTO.getReviewTitle() == null || hyMovieDTO.getReviewTitle().equals("")){
-            mv.setViewName("redirect:/hyounginput");
+            mv.setViewName("redirect:/");
         }
+        if(hyMovieDTO.getReviewDetail() == null || hyMovieDTO.getReviewDetail().equals("")){
+            mv.setViewName("redirect:/");
+        }*/
 
         // GPT 가 여기서부터 try catch 써서 예외처리 하라고 하는데 try catch 어떻게 들어가지ㅠㅠ
         // ▽ GPT 가 만들어준 try catch 로 리다이렉트랑 메세지, 예외처리 로직
@@ -76,7 +82,32 @@ public class HyController {
 
         // ▽ ModelAndView 객체를 반환하여 클라이언트에게 응답
         return mv;
+        // 리턴..레파지토리를 거쳐 다시 서비스로 가나?
     }
+
+
+
+/* 은진님주석//    [전체조회]
+    //전체 조회할 화면을 가져온다.
+    // 1. DB 에 저장된 데이터는 title 과 content이다
+    // 2. 서비스 클래스에서 조회할 데이터를 (DTO)타입으로 가져온다.
+    // 3. 근데 여러개니까 List<BlogDTO> 타입으로 가져온다.
+    // 4. postList 라는 키를 통해서 blogDTOList 데이터를 전달해준다.
+    // 가져올 떄 엔티티에 담긴 데이터를 DTO로 가져오나? 응 맞더라
+    // 5. list view 를 반환한다.*/
+    @GetMapping("/")
+    public String list(Model model){
+        List<HyMovieDTO> hyMovieDTOList = hyMovieService.getMovies();
+        model.addAttribute("postList", hyMovieDTOList);
+        // postList 는 html 과 연결되어 있음
+        return "list";
+        // index 로 두고 기본 템플릿으로 열었다면 코드 리소스를 줄일 수 있다.
+        //
+    }
+
+
+
+
 
 
     /*@PostMapping("/posts")
