@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>수정</title>
+</head>
+<body>
+<h1>수정하기_modify</h1>
+<form th:action="@{'/posts/modify/' + ${post.id}}" method="post">
+    <input type="hidden" name="method" value="put"/>
+    <input type="hidden" name="id" th:value="${post.id}" />
+    <div>
+        <label> <strong>제목</strong> </label><br>
+        <input type="text" name="title" id="title" th:value="${post.title}" />
+    </div>
+
+    <div>
+        <label><strong> 이미지 업로드(일단비움) </strong></label><br>
+        <textarea
+                type="text"
+                name="imageUrl"
+                id="imageUrl"
+                th:text="${post.imageUrl}">
+        </textarea>
+    </div>
+
+    <div>
+        <label><strong> best Ment </strong></label><br>
+        <textarea
+                type="text"
+                name="bestMent"
+                id="bestMent"
+                th:text="${post.bestMent}">
+        </textarea>
+    </div>
+
+    <div>
+        <label><strong> 리뷰 코멘트 </strong></label><br>
+        <textarea
+                type="text"
+                name="reviewComment"
+                id="reviewComment"
+                th:text="${post.reviewComment}">
+        </textarea>
+    </div>
+
+    <div class="modify">
+        <input type="submit" role="button" value="수정" />
+    </div>
+</form>
+</body>
+</html>

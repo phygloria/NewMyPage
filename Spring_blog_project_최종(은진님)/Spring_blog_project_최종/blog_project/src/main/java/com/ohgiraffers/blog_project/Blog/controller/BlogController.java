@@ -41,7 +41,7 @@ public class BlogController {
     // 게시글의 제목, 내용을 입력하는 화면을 가져와야 한다
     // 모델엔 뷰가 필요없으니 등록하면  등록하는 html만 가져오면 된다.
 
-//  등록한 글을 보낸다 데이터에 저장한다
+    // 등록한 글을 보낸다 데이터에 저장한다
     @PostMapping("/posts")
     public ModelAndView posts(@ModelAttribute BlogDTO blogDTO, ModelAndView mv) {
         blogService.savepost(blogDTO);
@@ -57,8 +57,8 @@ public class BlogController {
 
 
 
-//    [전체조회]
-//    전체 조회할 화면을 가져온다.
+    //    [전체조회]
+    //    전체 조회할 화면을 가져온다.
     // 1. DB 에 저장된 데이터는 title 과 content이다
     // 2. 서비스 클래스에서 조회할 데이터를 (DTO)타입으로 가져온다.
     // 3. 근데 여러개니까 List<BlogDTO> 타입으로 가져온다.
@@ -75,12 +75,12 @@ public class BlogController {
     //
     }
 
-// [상세조회]
-// 1. 수정할 화면을 가져온다.(상세조회)
-// 2. 리소스 : edit + pathvalue
-// 3. 블로그 서비스에서 getpost 함수를 통해 데이터를 가져오고 dto 에 담는다.
-// 4. detail 이라는 화면에 데이터를 넣어주는데 - 그 떄 "post"라는 키값을 사용한다.
-// 5. 그리고 그 view 를 반환하여 보여준다.
+    // [상세조회]
+    // 1. 수정할 화면을 가져온다.(상세조회)
+    // 2. 리소스 : edit + pathvalue
+    // 3. 블로그 서비스에서 getpost 함수를 통해 데이터를 가져오고 dto 에 담는다.
+    // 4. detail 이라는 화면에 데이터를 넣어주는데 - 그 떄 "post"라는 키값을 사용한다.
+    // 5. 그리고 그 view 를 반환하여 보여준다.
     @GetMapping("/posts/{id}")
     public ModelAndView detail(@PathVariable Integer id, Model model){
         BlogDTO blogDTO =blogService.getpost(id);
@@ -88,17 +88,16 @@ public class BlogController {
         return new ModelAndView("detail");
     }
 
-//     [수정하기]
-//     수정할 화면을 가져온다
-
+    //     [수정하기]
+    //     수정할 화면을 가져온다
       @GetMapping("/posts/modify/{id}")
     public ModelAndView modify(@PathVariable Integer id, Model model){
-        BlogDTO blogDTO =blogService.getpost(id);
+        BlogDTO blogDTO = blogService.getpost(id);
         model.addAttribute("post", blogDTO);
         return new ModelAndView("modify");
       }
 
-//    //수정된 데이터를 보낸다
+    //수정된 데이터를 보낸다
      @PostMapping("/posts/modify/{id}")
     public ModelAndView update(@PathVariable Integer id, @ModelAttribute BlogDTO blogDTO, ModelAndView mv) {
         BlogDTO existingPost = blogService.getpost(id);

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>등록</title>
+</head>
+<body>
+
+<h1>게시물 등록_post</h1>
+
+<form th:action=" @{/posts}" method="post">
+    <!-- 제목 영역 -->
+    <div>
+        <label for="title"> <strong>제목 : </strong></label>
+        <input type ="text" id="title" name="title" placeholder="리뷰 제목" required>
+    </div>
+
+    <!-- 이미지 업로드 영역 -->
+    <div>
+        <input type ="text" id="imageUrl" name="imageUrl" placeholder="이미지업로드영역 일단 비움">
+        <!--<input type="file" id="imageUrl" name="imageUrl" class="imageUrl" placeholder="main-poster" />-->
+    </div>
+
+    <!-- 명대사 영역 -->
+    <div>
+        <label for="bestMent"> <strong>내용 : </strong></label><br>
+        <textarea type="text" id="bestMent" name="bestMent" rows="7" cols="50" placeholder="명대사" required ></textarea>
+        <!-- row 는 텍스트 영역의 세로 크기를 줄단위로 지정-->
+        <!-- cols 는 텍스트 영역의 가로 크기를 문자단위로 지정 -->
+        <!-- placeholder 는 영역 내에 회색 가이드텍스트를 지정-->
+        <!-- required 가 있으면 사용자가 텍스트 영역을 비워둘 수 없음-->
+    </div>
+
+    <!-- 리뷰 코멘트 영역 -->
+    <div>
+        <label for="reviewComment"> <strong>리뷰코멘트 : </strong></label><br>
+        <textarea type="text" id="reviewComment" name="reviewComment" rows="10" cols="50" placeholder="리뷰 코멘트" required ></textarea>
+    </div>
+
+    <!-- 전송 영역 -->
+    <div>
+<!--    // 은진님 주석 : 아니 너 왜 글쓰기 누르면 메인으로 안가니?
+        // + PHY : input 태그가 th:href 태그를 사용하지 않기 때문이라고 합니당!!
+        <input type="submit" role="button" th:href="@{'/'}" value="등록" />-->
+        <!-- <a type="submit" th:href="@{/}">등록</a> !!a태그는 submit이 안된다!! -->
+
+        <!-- submit을 해야 저장한 값이 보내진다. -->
+        <!-- th:href="@{경로}" 가 없어도 컨트롤러에 리다이렉트 로직에 경로가 있어서 넘어갈 수 있는 듯?? -->
+        <input type="submit" role="button" value="등록" />
+    </div>
+
+</form>
+
+</body>
+</html>

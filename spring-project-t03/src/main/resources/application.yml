@@ -3,14 +3,11 @@
 server:
   port: 8002
 spring:
-  thymeleaf:
-    prefix: classpath:/templates/
-    suffix: .html
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/phy
-    password: PHY
-    username: PHY
+    url: jdbc:mysql://localhost:3306/rephy
+    password: REPHY
+    username: REPHY
   jpa:
     show-sql: true
     properties:
@@ -18,5 +15,5 @@ spring:
         format_sql: true
     database: mysql
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
