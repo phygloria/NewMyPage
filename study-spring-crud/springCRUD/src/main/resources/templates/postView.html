@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="@{'Post | ' + ${post.title}}"></title>
+</head>
+<body>
+<!-- 상세조회 -->
+<h1> 상세조회 ! </h1>
+<h5 th:text="${post.title}"></h5>
+<p th:text="${post.contents}"></p>
+
+<!-- 다시 리스트로 -->
+<div>
+    <a th:href="@{'/postList'}" role="button"> 리스트 </a>
+</div>
+
+
+
+</body>
+</html>

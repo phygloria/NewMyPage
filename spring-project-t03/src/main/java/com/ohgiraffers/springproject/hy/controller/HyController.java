@@ -5,10 +5,7 @@ import com.ohgiraffers.springproject.hy.service.HyMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -61,7 +58,7 @@ public class HyController {
         }
         // ▽ ModelAndView 객체를 반환
         return mv;
-        // 리턴..레파지토리를 거쳐 다시 서비스로 가나?
+        // 리턴..레파지토리를 거쳐 다시 서비스로 가나? //No 현재위치 컨트롤러. 서비스로 먼저 갔다가 레파지토리로 간다.
     }
 
 
@@ -110,7 +107,7 @@ public class HyController {
     //     수정할 화면을 가져온다(조회와 같음)
     //get 요청은 주로 데이터를 조회할 때 사용//여기서는 어떤 id를 수정할지 조회
     @GetMapping("/posts/modify/{id}")
-    public ModelAndView modify(@PathVariable Integer id, ModelAndView mv){
+    public ModelAndView modify(@PathVariable("id") Integer id, Model model){
         // △ ModelAndView 는 반환타입
         // △ @PathVariable 은 경로변수 url에서 id를 가져와 Integer id 변수에 할당.//("")를 사용해 명시적으로 지정할 수 있다.
         // Model은 데이터를 뷰로 전달하는데 사용되는 인터페이스이다.
@@ -118,35 +115,34 @@ public class HyController {
         // △ DTO는 서비스에서 데이터를 받아 컨트롤러로 전달하기 위함
         // △ 서비스 객체의 getMoviePost 메서드를 호출하여 id에 해당하는 게시물의 정보를 가져온다.
         // △ 가져온 정보를 DTO에 담아 저장한다.
-        mv.addObject("post", hyMovieDTO);
+        model.addAttribute("post", hyMovieDTO);
         // △ model 객체에 데이터를 추가한다. 이 데이터를 뷰로 전달하면 화면에 표시할수있게됨.
         // △ 뷰에서 사용할 데이터의 이름을 "post"로 한다. //△ DTO는 뷰로 전달할 실제 데이터.
-        mv.setViewName("modify");
         // ▽ 반환타입 객체를 생성하고, 뷰 이름이 "modify"인 페이지에 렌더링하겠다
-        return mv;
+        return new ModelAndView("modify");
         // 수정 로직을 실제 실행하기전에 어떤 포스트를 수정할지 선택해 가져오는 메서드로
         // 코드는 조회와 같지만 modify 페이지에 랜더링해서 그다음 수정로직을 진행한다.
     }
 
     @PostMapping("/posts/modify/{id}")
     // ▽ 모델앤뷰는 반환타입. update는 메서드이름.
-    public ModelAndView update(@PathVariable Integer id,
-                               //△ @패스베리어블은 id를 경로변수url에서 가져와 인티저id에 담아주는거.
+    public ModelAndView update(@PathVariable("id") Integer id,
+                               // △ @패스베리어블은 id를 경로변수url에서 가져와 인티저id에 담아주는거.
                                @ModelAttribute HyMovieDTO hyMovieDTO, ModelAndView mv){
-                               //△ @모델어트리뷰트는 뭐지? DTO 객체를 생성?, 모델앤뷰를 mv로 변수명지정.
-        //▽ DTO를 modifyPost에 담겠다? 서비스의 getMoviePost 메서드를 호출/(id)값의 포스트를 가져옴.
+                               // △ @모델어트리뷰트는 뭐지? DTO 객체를 생성?, 모델앤뷰를 mv로 변수명지정.
+        // ▽ DTO를 modifyPost에 담겠다? 서비스의 getMoviePost 메서드를 호출/(id)값의 포스트를 가져옴.
         HyMovieDTO modifyPost = hyMovieService.getMoviePost(id);
         if(modifyPost != null){ //modifyPost가 비어있는 null값이 아닐 경우.
-            //▽ modifyPost에 담겨있을 정보들
+            // ▽ modifyPost에 담겨있을 정보들
             modifyPost.setTitle(hyMovieDTO.getTitle());
             modifyPost.setImageUrl(hyMovieDTO.getImageUrl());
             modifyPost.setBestMent(hyMovieDTO.getBestMent());
             modifyPost.setReviewComment(hyMovieDTO.getReviewComment());
 
-            //▽ 서비스의 updatePost 메서드가 호출되어 modifyPost 데이터를 저장
+            // ▽ 서비스의 updatePost 메서드가 호출되어 modifyPost 데이터로 업데이트(수정)
             hyMovieService.updatePost(modifyPost);
         }
-        //▽ 리다이렉트 기능은 알겠는데 왜 여기서 이게 나오는지는 모르겠음;
+        // ▽ 수정을 완료했으므로 수정된 화면을 보여줌
         mv.setViewName("redirect:/posts/" + id);
         return mv;
     }
@@ -155,8 +151,10 @@ public class HyController {
 
     /* 삭제하기 */
     @PostMapping("/posts/delete/{id}")
-    public ModelAndView delete(@PathVariable Integer id, ModelAndView mv){
+    public ModelAndView delete(@PathVariable("id") Integer id, ModelAndView mv){
+        // ▽ 서비스의 deletePost 메서드가 호출되어 id에 해당하는 포스트를 삭제
         hyMovieService.deletePost(id);
+        // ▽ 삭제되었으므로 그자리에 머물기X 메인페이지에서 리스트에 사라진것을 확인.
         mv.setViewName("redirect:/");
         return mv;
     }

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>등록</title>
+
+</head>
+<body>
+
+<h1> 등록하기 </h1>
+<form th:action="@{/posts}" method="post" >
+    <h3>제목</h3>
+    <input type="text" class="title" name="title" placeHolder="글 제목">
+    <h3>내용</h3>
+    <textarea type="text" class="contents" name="contents" placeHolder="글 내용"></textarea>
+<br>
+    <!-- submit을 해야 저장한 값이 보내진다. -->
+    <!-- 컨트롤러에 리다이렉트 로직으로 경로가 넘어가는 듯?? -->
+    <input type="submit" role="button" th:href="@{/postList}" value="등록" />
+</form>
+<script th:inline="javascript">
+        const flashMessage = '[[${flashMessage}]]';
+
+        if(flashMessage) {
+            alert(flashMessage);
+        }
+</script>
+</body>
+</html>

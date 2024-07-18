@@ -1,0 +1,22 @@
+#spring.application.name=springCRUD
+
+server:
+  port: 8083
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/study
+    password: PHY
+    username: PHY
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: mysql
+    hibernate:
+      ddl-auto: update
+
