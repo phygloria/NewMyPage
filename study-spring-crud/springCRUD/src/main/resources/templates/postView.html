@@ -10,11 +10,28 @@
 <h5 th:text="${post.title}"></h5>
 <p th:text="${post.contents}"></p>
 
+<br>
+<!-- 수정버튼 -->
+<div>
+    <a th:href="@{'/posts/postUpdate/' + ${post.id}}" role="button"> 수정 </a>
+</div>
+<br>
+
+<!-- 삭제버튼 -->
+
+
+
+
+<br>
 <!-- 다시 리스트로 -->
 <div>
     <a th:href="@{'/postList'}" role="button"> 리스트 </a>
 </div>
-
+<br>
+<!-- 다시 메인으로 -->
+<div>
+    <a th:href="@{'/'}" role="button"> 메인으로 </a>
+</div>
 
 
 </body>

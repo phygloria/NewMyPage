@@ -19,6 +19,7 @@ public class HYStudyService {
     // MVC 패턴에 따라 Repository 클래스를 선언
     private final HYStudyRepository hyStudyRepository;
 
+
     @Autowired // 자동주입 어노테이션
     public HYStudyService(HYStudyRepository hyStudyRepository) {
         //생성자를 통해 레파지토리 인스턴스를 저장
@@ -35,7 +36,7 @@ public class HYStudyService {
     * */
     @Transactional
     //▽ 컨트롤러에서 보낸 데이터를 저장할 메소드
-    public void savepost(HYStudyDTO hyStudyDTO) {
+    public HYStudyDTO savepost(HYStudyDTO hyStudyDTO) {
     //                  △컨트롤러에서 DTO에 바인딩해 보낸걸 받음
 
         //▽ 엔티티 클래스를 선언초기화 //jpa를 활용하여 데이터베이스에 저장하기 위함
@@ -45,6 +46,8 @@ public class HYStudyService {
         hyStudyEntity.setContents(hyStudyDTO.getContents()); //엔티티에 .set(DTO가 .get)
         //▽ set해준 엔티티를 레파지토리를 이용하여 저장
         hyStudyRepository.save(hyStudyEntity);
+
+        return hyStudyDTO;
     }
 
 
@@ -83,23 +86,23 @@ public class HYStudyService {
 
     /* [상세조회] */
     // DTO id를 가져와서 해당하는 정보를 Entity id에 넣어준다
-    public HYStudyDTO postView(Long id) throws Exception {
+    public HYStudyDTO postView(Long id){
     // 이 메서드는 id를 받아서 해당하는 정보를 가져오는 기능을 수행
         // ▽ 데이터베이스에 저장된 엔티티를 가져오겠다.
         // ▽ Repository를 통해 id에 해당하는 Entity 객체를 데이터베이스에서 조회한다.
-        Optional<HYStudyEntity> optionalEntity = hyStudyRepository.findById(id);
+        HYStudyEntity hyStudyEntity = hyStudyRepository.findById(id).get();
+//        Optional<HYStudyEntity> optionalEntity = hyStudyRepository.findById(id);
         /*// △ .get() 메서드는 실제 객체를 추출한다. <- findById(id)의 결과가 null이 아니라는 가정 하에 사용
         * Optional을 사용하면서 .get() 메서드를 사용할 수 없게 된다.//findById(id).get() 으로 사용했었는데 옵셔널 추가하면서 오류남
         * Optional 객체는 값이 존재하지 않을 수도 있기 때문에, 강제로 값을 추출하는 .get() 메서드는 사용하지 않도록 권장된다.
         * 이는 NoSuchElementException을 발생시킬 수 있기 때문이다. */
         // △ Optional 사용: findById(id) 메서드는 Optional<HYStudyEntity>를 반환한다. 이를 optionalEntity라는 변수에 저장.
 
-
-        // Optional의 값이 존재하지 않으면 Exception을 던집니다.
+/*        // Optional의 값이 존재하지 않으면 Exception을 던집니다.
         HYStudyEntity hyStudyEntity = optionalEntity.orElseThrow(
                 () -> new Exception("게시글이 존재하지 않습니다."));
         // △ 값의 존재 여부 확인: optionalEntity.orElseThrow() 메서드를 사용하여 Optional에서 값을 안전하게 추출한다.
-        // 값이 존재하면 해당 값이 반환되고, 값이 존재하지 않으면 DataNotFoundException이 발생한다.
+        // 값이 존재하면 해당 값이 반환되고, 값이 존재하지 않으면 Exception이 발생한다.*/
 
         // ▽ 조회한 데이터를 담을 새로운 DTO 객체를 생성
         HYStudyDTO hyStudyDTO = new HYStudyDTO();
@@ -115,6 +118,18 @@ public class HYStudyService {
         // 이 코드는 데이터베이스에서 특정(id)정보를 조회하여 DTO객체로 변환하는 과정을 수행하는 메서드이다.
 
     }
+
+    // 수정한 데이터를 저장(업데이트)한다.
+    @Transactional
+    public HYStudyDTO postUpdate(HYStudyDTO updateDTO) {
+        HYStudyEntity hyStudyEntity = hyStudyRepository.findById(updateDTO.getId()).get();
+        hyStudyEntity.setTitle(updateDTO.getTitle());
+        hyStudyEntity.setContents(updateDTO.getContents());
+        hyStudyRepository.save(hyStudyEntity);
+
+        return updateDTO;
+    }
+
 
 
     /* [수정하기] */

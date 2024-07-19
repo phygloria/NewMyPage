@@ -17,13 +17,17 @@
     <!-- submit을 해야 저장한 값이 보내진다. -->
     <!-- 컨트롤러에 리다이렉트 로직으로 경로가 넘어가는 듯?? -->
     <input type="submit" role="button" th:href="@{/postList}" value="등록" />
+
 </form>
 <script th:inline="javascript">
-        const flashMessage = '[[${flashMessage}]]';
+    window.onload = function() {
+        const message = '[[${message}]]';
 
-        if(flashMessage) {
-            alert(flashMessage);
+        if (message !== null) {
+            alert(message);
         }
+    }
 </script>
+
 </body>
 </html>
