@@ -122,7 +122,7 @@ public class HYStudyController {
             mv.setViewName("postView");
 
         }catch (Exception e){
-*//*            *//**//* [예외처리?] *//**//*
+            *//* [예외처리?]
             alert.addFlashAttribute("flashMessage2"," "+ e.getMessage());
             mv.setViewName("redirect:/postList");*//*
         }*/
@@ -134,35 +134,53 @@ public class HYStudyController {
     /* [수정하기] */
     // 수정할 포스트를 먼저 가져온다.
     @GetMapping("/posts/postUpdate/{id}")
-    public String postEdit(@PathVariable("id") Long id, ModelAndView mv){
+    public String postEdit(@PathVariable("id") Long id, Model model){
         // 호출하는 함수가 자료형타입이 같아야함. 포스트를 먼저 가져오기때문에 상세조회와 거의 같다.
-        //
+        //▽ 서비스에서 postView함수를 호출하여 id에 해당하는 포스트를 찾아 update에 담아준다.
         HYStudyDTO update = hyStudyService.postView(id);
+        //▽ 찾은 포스트id를 옮겨줄 새 DTO객체를 생성한다
         HYStudyDTO hyStudyDTO = new HYStudyDTO();
 
+        //▽ 새로만든 DTO에게 get한 데이터들을 set해준다. 전달해주라고 넘겨줌.
         hyStudyDTO.setId(update.getId());
         hyStudyDTO.setTitle(update.getTitle());
         hyStudyDTO.setContents(update.getContents());
 
-        mv.addObject("post", hyStudyDTO);
-        // 수정을 작성할 곳으로 보낸다
+        //▽ DTO에 담아준 데이터를 ""어트리뷰트 네임을 키로 하여 모델에 담아 view에 전달한다?
+        model.addAttribute("post", hyStudyDTO);
 
+        // model이 전달을 수행할 view이름. //수정을 작성할 곳으로 보낸다
         return "/postUpdate";
     }
 
-    @PostMapping("/posts/{id}")
-    public String postUpdate(@PathVariable("id") Long id, ModelAndView mv){
+    @PostMapping("/posts/postUpdate/{id}")
+    //▽ @PathVariable로 id를 받아오고, @ModeAttribute로 데이터 받을 DTO객체 생성 및 받아옴, Model은 뷰로 전달할 데이터를 담는 그릇
+    public String postUpdate(@PathVariable("id") Long id, @ModelAttribute HYStudyDTO hyStudyDTO, Model model){
+        //▽ 서비스에서 어떤 포스트인지 id로 찾아주고 새로선언한 DTO에 담아줌
         HYStudyDTO updateDTO = hyStudyService.postView(id);
+        //▽ DTO가 데이터를 담고있는지 확인. null이 아니면 if함수 실행
         if(updateDTO != null){
-            updateDTO.setTitle(updateDTO.getTitle());
-            updateDTO.setContents(updateDTO.getContents());
-
-            // ▽ 서비스의 updatePost 메서드가 호출되어 modifyPost 데이터로 업데이트(수정)
+            //▽ 위에 @GetMapping에서 담아온 DTO가 get한 데이터들을 여기서 선언한DTO에 set해줌
+            updateDTO.setTitle(hyStudyDTO.getTitle());
+            updateDTO.setContents(hyStudyDTO.getContents());
+            // ▽ 서비스의 postUpdate 메서드가 호출되어 DTO가 데이터 전달 및 업데이트(수정)//서비스로 go!
             hyStudyService.postUpdate(updateDTO);
         }
         // ▽ 수정을 완료했으므로 수정된 화면을 보여줌
-        return "redirect:/postView/" + id;
+        return "redirect:/posts/{id}";
     }
+
+    /* [삭제하기] */
+    @PostMapping("/posts/postDelete/{id}")
+    public ModelAndView postDelete(@PathVariable("id") Long id, ModelAndView mv){
+        hyStudyService.deletePost(id);
+        mv.setViewName("redirect:/postList");
+
+
+        return mv;
+
+    }
+
 
 
 

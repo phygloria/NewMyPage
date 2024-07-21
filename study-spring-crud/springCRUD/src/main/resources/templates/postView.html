@@ -18,7 +18,12 @@
 <br>
 
 <!-- 삭제버튼 -->
-
+<div>
+    <form id="postDelete" th:action="@{'/posts/postDelete/' + ${post.id}}" method="post">
+        <input type="hidden" name="method" value="postDelete" />
+        <button type="submit">삭제</button>
+    </form>
+</div>
 
 
 

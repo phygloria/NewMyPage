@@ -11,11 +11,11 @@
     <input type="hidden" name="id" th:value="${post.id}" />
     <div>
         <h3>제목</h3>
-        <input type="text" class="title" name="title" th:text="${post.title}" />
+        <input type="text" class="title" name="title" th:value="${post.title}" />
     </div>
     <div>
         <h3>내용</h3>
-        <textarea type="text" class="contents" name="contents" th:text="${post.content}"></textarea>
+        <textarea type="text" class="contents" name="contents" th:text="${post.contents}"></textarea>
     </div>
 
     <br>

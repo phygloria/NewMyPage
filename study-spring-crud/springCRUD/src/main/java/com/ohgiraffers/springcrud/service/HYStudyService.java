@@ -121,19 +121,23 @@ public class HYStudyService {
 
     // 수정한 데이터를 저장(업데이트)한다.
     @Transactional
-    public HYStudyDTO postUpdate(HYStudyDTO updateDTO) {
+    // 컨트롤러에서 선언한 DTO가 데이터를 가져옴
+    public void postUpdate(HYStudyDTO updateDTO) {
+        //▽ 레파지토리의 find함수를 통해 dto가 가져온id에 해당하는 id를 찾고 맨 뒤의 .get()으로 해당 기존데이터를 꺼냄
         HYStudyEntity hyStudyEntity = hyStudyRepository.findById(updateDTO.getId()).get();
+        //▽ dto가 get해온 데이터를 하나씩 엔티티의 해당 데이터에 set해줌
         hyStudyEntity.setTitle(updateDTO.getTitle());
         hyStudyEntity.setContents(updateDTO.getContents());
-        hyStudyRepository.save(hyStudyEntity);
 
-        return updateDTO;
+        //▽ 레파지토리의 save의 함수로 수정된 엔티티를 저장!!
+        hyStudyRepository.save(hyStudyEntity);
+        // 반환타입 void를 써서 무조건 그냥 저장함. -> 컨트롤러로 go!
     }
 
 
 
-    /* [수정하기] */
-    //어떤 포스트를 수정할지 조회 먼저 한다
+    /* [삭제하기] */
+    public void deletePost(Long id){ hyStudyRepository.deleteById(id); }
 
 
 
