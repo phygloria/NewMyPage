@@ -2,7 +2,8 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Main</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 <table>
@@ -11,12 +12,12 @@
 </table>
 <!-- 리스트로 -->
 <div>
-    <a th:href="@{'/postList'}" role="button"> 리스트 </a>
+    <a th:href="@{'/postList'}" role="button" class="postList" > 리스트 </a>
 </div>
 
 <!-- 등록하기 -->
 <div>
-    <a th:href="@{'/posts'}" role="button"> 등록하기 </a>
+    <a th:href="@{'/posts'}" role="button" class="postInsert" > 등록하기 </a>
 </div>
 
 </body>

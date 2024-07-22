@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>등록</title>
+    <link rel="stylesheet" href="/css/styles.css">
 
 </head>
 <body>
@@ -16,15 +17,15 @@
 <br>
     <!-- submit을 해야 저장한 값이 보내진다. -->
     <!-- 컨트롤러에 리다이렉트 로직으로 경로가 넘어가는 듯?? -->
-    <input type="submit" role="button" th:href="@{/postList}" value="등록" />
+    <input type="submit" role="button" th:href="@{/postList}" class="postInsert" value="등록" />
 
 </form>
 <script th:inline="javascript">
     window.onload = function() {
-        const message = '[[${message}]]';
+        const message = [[${message != null ? 'true' : 'false'}]];
 
-        if (message !== null) {
-            alert(message);
+        if (message === 'true') {
+            alert('[[${message}]]');
         }
     }
 </script>

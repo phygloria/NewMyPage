@@ -4,14 +4,11 @@ import com.ohgiraffers.springcrud.dao.HYStudyRepository;
 import com.ohgiraffers.springcrud.model.dto.HYStudyDTO;
 import com.ohgiraffers.springcrud.model.entity.HYStudyEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class HYStudyService {
@@ -86,23 +83,11 @@ public class HYStudyService {
 
     /* [상세조회] */
     // DTO id를 가져와서 해당하는 정보를 Entity id에 넣어준다
-    public HYStudyDTO postView(Long id){
+    public HYStudyDTO postView(Long id) {
     // 이 메서드는 id를 받아서 해당하는 정보를 가져오는 기능을 수행
         // ▽ 데이터베이스에 저장된 엔티티를 가져오겠다.
         // ▽ Repository를 통해 id에 해당하는 Entity 객체를 데이터베이스에서 조회한다.
         HYStudyEntity hyStudyEntity = hyStudyRepository.findById(id).get();
-//        Optional<HYStudyEntity> optionalEntity = hyStudyRepository.findById(id);
-        /*// △ .get() 메서드는 실제 객체를 추출한다. <- findById(id)의 결과가 null이 아니라는 가정 하에 사용
-        * Optional을 사용하면서 .get() 메서드를 사용할 수 없게 된다.//findById(id).get() 으로 사용했었는데 옵셔널 추가하면서 오류남
-        * Optional 객체는 값이 존재하지 않을 수도 있기 때문에, 강제로 값을 추출하는 .get() 메서드는 사용하지 않도록 권장된다.
-        * 이는 NoSuchElementException을 발생시킬 수 있기 때문이다. */
-        // △ Optional 사용: findById(id) 메서드는 Optional<HYStudyEntity>를 반환한다. 이를 optionalEntity라는 변수에 저장.
-
-/*        // Optional의 값이 존재하지 않으면 Exception을 던집니다.
-        HYStudyEntity hyStudyEntity = optionalEntity.orElseThrow(
-                () -> new Exception("게시글이 존재하지 않습니다."));
-        // △ 값의 존재 여부 확인: optionalEntity.orElseThrow() 메서드를 사용하여 Optional에서 값을 안전하게 추출한다.
-        // 값이 존재하면 해당 값이 반환되고, 값이 존재하지 않으면 Exception이 발생한다.*/
 
         // ▽ 조회한 데이터를 담을 새로운 DTO 객체를 생성
         HYStudyDTO hyStudyDTO = new HYStudyDTO();
@@ -122,16 +107,18 @@ public class HYStudyService {
     // 수정한 데이터를 저장(업데이트)한다.
     @Transactional
     // 컨트롤러에서 선언한 DTO가 데이터를 가져옴
-    public void postUpdate(HYStudyDTO updateDTO) {
+    public HYStudyDTO postUpdate(Long id, HYStudyDTO updateDTO) {
         //▽ 레파지토리의 find함수를 통해 dto가 가져온id에 해당하는 id를 찾고 맨 뒤의 .get()으로 해당 기존데이터를 꺼냄
         HYStudyEntity hyStudyEntity = hyStudyRepository.findById(updateDTO.getId()).get();
         //▽ dto가 get해온 데이터를 하나씩 엔티티의 해당 데이터에 set해줌
+        hyStudyEntity.setId(updateDTO.getId());
         hyStudyEntity.setTitle(updateDTO.getTitle());
         hyStudyEntity.setContents(updateDTO.getContents());
 
         //▽ 레파지토리의 save의 함수로 수정된 엔티티를 저장!!
         hyStudyRepository.save(hyStudyEntity);
-        // 반환타입 void를 써서 무조건 그냥 저장함. -> 컨트롤러로 go!
+        return updateDTO;
+        // 반환타입 저장함. -> 컨트롤러로 go!
     }
 
 
@@ -141,28 +128,18 @@ public class HYStudyService {
 
 
 
+/* [Optional을 사용한 상세조회 예외처리. try-cath와 연동] */
+//        Optional<HYStudyEntity> optionalEntity = hyStudyRepository.findById(id);
+//        /*// △ .get() 메서드는 실제 객체를 추출한다. <- findById(id)의 결과가 null이 아니라는 가정 하에 사용
+//        * Optional을 사용하면서 .get() 메서드를 사용할 수 없게 된다.//findById(id).get() 으로 사용했었는데 옵셔널 추가하면서 오류남
+//        * Optional 객체는 값이 존재하지 않을 수도 있기 때문에, 강제로 값을 추출하는 .get() 메서드는 사용하지 않도록 권장된다.
+//        * 이는 NoSuchElementException을 발생시킬 수 있기 때문이다. */
+//        // △ Optional 사용: findById(id) 메서드는 Optional<HYStudyEntity>를 반환한다. 이를 optionalEntity라는 변수에 저장.
+//
+//        // Optional의 값이 존재하지 않으면 Exception을 던집니다.
+//        HYStudyEntity hyStudyEntity = optionalEntity.orElseThrow(
+//                () -> new Exception("게시글이 존재하지 않습니다."));
+//        // △ 값의 존재 여부 확인: optionalEntity.orElseThrow() 메서드를 사용하여 Optional에서 값을 안전하게 추출한다.
+//        // 값이 존재하면 해당 값이 반환되고, 값이 존재하지 않으면 Exception이 발생한다.
 
-
-/* GPT최적화 코드..해결X     *//* [전체조회] *//*
-    // 등록된거 확인하기
-    @Transactional
-    // ▽ 모든 게시물을 조회하여 HYStudyDTO 리스트로 반환하는 메소드
-    public List<HYStudyDTO> viewAllposts(){
-        // List : 순차적으로 데이터를 저장할 수 있는 자료 구조
-        // ▽ hyStudyRepository 객체는 데이터베이스에 접근하여 CRUD (Create, Read, Update, Delete) 작업을 수행
-        List<HYStudyEntity> hyStudyEntities = hyStudyRepository.findAll();
-        //△ 데이터베이스에서 조회한 HYStudyEntity 객체들의 리스트를 저장할 변수를 선언
-        //△ 리포지토리의 findAll() 메소드를 호출하여 데이터베이스의 모든 HYStudyEntity 객체들을 조회
-        return hyStudyEntities.stream()
-                .map(this::convertToDTO) // convertToDTO 메소드를 사용하여 변환
-                .collect(Collectors.toList());
-
-    }
-    private HYStudyDTO convertToDTO(HYStudyEntity hyStudyEntity){
-        HYStudyDTO hyStudyDTO = new HYStudyDTO();
-        hyStudyDTO.setId(hyStudyEntity.getId());
-        hyStudyDTO.setTitle(hyStudyDTO.getTitle());
-
-        return hyStudyDTO;
-    }*/
 }

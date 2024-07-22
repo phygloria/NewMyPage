@@ -1,0 +1,209 @@
+/* 기본 레이아웃 설정 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 50px;
+    font-size: 2.5em;
+}
+
+
+table {
+    margin-top: 30px;
+}
+
+/* posts */
+form {
+    width: 50%;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h3 {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+
+/* 인풋 및 텍스트에어리어 스타일링 */
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus, textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 200px;
+}
+
+/* 버튼 스타일링 */
+/*input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+
+}*/
+
+.postInsert {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+.postInsert:hover {
+    background-color: #0bc284;
+}
+
+/* 수정 */
+.postUpdate {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #8842c2;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1em;
+    text-align: center;
+    cursor: pointer;
+}
+.postUpdate:hover {
+    background-color: #139dff;
+    color: #ffffff;
+}
+
+
+
+
+/* 리스트 */
+/*a[role="button"] {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0bc284;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1em;
+    text-align: center;
+    cursor: pointer;
+}
+
+a[role="button"]:hover {
+    background-color: #b46aff;
+}*/
+.postList {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0bc284;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1em;
+    text-align: center;
+    cursor: pointer;
+}
+.postList:hover {
+    background-color: #139dff;
+    color: #ffffff;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 80%;
+    max-width: 600px; /* 리스트의 최대 너비를 줄입니다. */
+}
+
+li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 5px 0; /* 항목 간의 간격을 줄입니다. */
+    padding: 10px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1); /* 더 미세한 그림자 */
+    transition: background-color 0.3s, box-shadow 0.3s; /* 부드러운 전환 효과 추가 */
+}
+
+li:hover {
+    background-color: #f9f9f9; /* 마우스 오버 시 배경색 변경 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* 마우스 오버 시 그림자 변경 */
+}
+
+
+a {
+    text-decoration: none;
+    color: #007BFF;
+    font-size: 1.2em;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+div {
+    margin-top: 20px;
+}
+
+.notFound {
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.deleteBTN {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff0000;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.deleteBTN:hover {
+    background-color: #ffb310;
+    color: #ff0000;
+}
+.postDelete {
+    width: 110%;
+    margin: 0 auto;
+    background: #fff;
+    padding: 0px;
+    box-shadow: 0 0 0 0px;
+    border-radius: 0px;
+
+}
